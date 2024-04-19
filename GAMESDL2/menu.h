@@ -47,11 +47,7 @@ bool Menu::loadMenuTextures() {
     return success;
 }
 
-// void Menu::render() {
-//     // Vẽ menu lên màn hình
-//     playTexture.render(SCREEN_WIDTH / 2 - 66, SCREEN_HEIGHT / 2  + 20);
-//     exitTexture.render(SCREEN_WIDTH / 2 - 30, SCREEN_HEIGHT / 2 + 180);
-// }
+
 
 void Menu::renderBackground(bool playHighlighted, bool exitHighlighted) {
     SDL_SetRenderDrawColor(gRenderer, 255, 255, 255, 255);
@@ -81,8 +77,7 @@ void Menu::renderBackground(bool playHighlighted, bool exitHighlighted) {
     // exitTexture.render(SCREEN_WIDTH / 2 - 30, SCREEN_HEIGHT / 2 + 180, &exitRect);
     exitTexture.render_draw(&exitRect);
     SDL_RenderPresent(gRenderer);
-    // playTexture.render(SCREEN_WIDTH / 2 - 66, SCREEN_HEIGHT / 2  + 20);
-    // exitTexture.render(SCREEN_WIDTH / 2 - 30, SCREEN_HEIGHT / 2 + 180);
+
 }
 
 int Menu::handleEvent(SDL_Event& e) {

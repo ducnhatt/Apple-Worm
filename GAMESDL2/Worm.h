@@ -11,6 +11,7 @@
 #include <fstream>
 #include <string>
 #include <iostream>
+#include <algorithm>
 using namespace std;
 
 struct worm{
@@ -94,19 +95,15 @@ struct worm{
             switch(e.key.keysym.sym) {
                 case SDLK_UP: 
                     direction = UP;
-                    // degrees = 270; // Đặt góc để đầu con sâu quay lên
                     break;
                 case SDLK_DOWN: 
                     direction = DOWN; 
-                    // degrees = 90; // Đặt góc để đầu con sâu quay xuống
                     break;
                 case SDLK_LEFT: 
                     direction = LEFT;
-                    // degrees = 180; // Đặt góc để đầu con sâu quay sang trái
                     break;
                 case SDLK_RIGHT: 
                     direction = RIGHT;
-                    // degrees = 0; // Đặt góc để đầu con sâu quay sang phải
                     break;
                 default: 
                     break;
@@ -351,10 +348,52 @@ struct worm{
 };
 void worm::render(){
     for(auto it =Worm.begin(); it != Worm.end(); it++){
-			if(it ==Worm.begin()) head.render((*it).x * 30, (*it).y * 30, NULL, degrees, NULL, flipType);
-			else body.render((*it).x * 30, (*it).y * 30);
+			if(it == Worm.begin()) head.render((*it).x * 30, (*it).y * 30, NULL, degrees, NULL, flipType);
+			// else if(it + 1 != Worm.end()) body.render((*it).x * 30, (*it).y * 30);
+            else if(it + 1 != Worm.end()){
+                Position before_body_cur = *(it - 1);   //Phần tử trước body hiện tại
+                Position after_body_cur = *(it + 1);    //phần tử sau body hiện tại
+
+                int before_x = subtraction_X(before_body_cur, *it);
+                int before_y = subtraction_Y(before_body_cur, *it);
+
+                int after_x = subtraction_X(after_body_cur, *it);
+                int after_y = subtraction_Y(after_body_cur, *it);
+
+                //xử lí các góc vuông
+                if((before_x == 1 && before_y == 0 && after_x == 0 && after_y == 1) || (before_x == 0 && before_y == 1 && after_x == 1 && after_y == 0))
+                    branch.render((*it).x * 30, (*it).y * 30, NULL, 270, NULL, flipType);
+                else if((before_x == 0 && before_y == -1 && after_x == 1 && after_y == 0) || (before_x == 1 && before_y == 0 && after_x == 0 && after_y == -1))
+                    branch.render((*it).x * 30, (*it).y * 30, NULL, 180, NULL, flipType);
+                else if((before_x == -1 && before_y == 0 && after_x == 0 && after_y == -1) || (before_x == 0 && before_y == -1 && after_x == -1 && after_y == 0))
+                    branch.render((*it).x * 30, (*it).y * 30, NULL, 90, NULL, flipType);
+                else if((before_x == -1 && before_y == 0 && after_x == 0 && after_y == 1) || (before_x == 0 && before_y == 1 && after_x == -1 && after_y == 0))
+                    branch.render((*it).x * 30, (*it).y * 30);
+                else{       
+                    if(before_x == 0 && after_x == 0 && (before_y + after_y == 0)) body.render((*it).x * 30, (*it).y * 30, NULL, 90, NULL, flipType);
+                    else    body.render((*it).x * 30, (*it).y * 30);
+                }
+            }
             // cout << (*it).x << " " << (*it).y << endl;
 	}
+    auto before_tail = Worm.begin();
+    Position worm_tail = Worm.back();
+    while(before_tail != Worm.end()){
+        before_tail++;
+    }
+    before_tail = before_tail - 2;
+    int xx = subtraction_X(*before_tail, worm_tail);
+    int yy = subtraction_Y(*before_tail, worm_tail);
+    
+    if(xx == 0){
+        if(yy == 1) tail.render(worm_tail.x * 30, worm_tail.y * 30, NULL, 90, NULL, flipType);
+        else    tail.render(worm_tail.x * 30, worm_tail.y * 30, NULL, 270, NULL, flipType);
+    }
+    else{
+        if(xx == -1) tail.render(worm_tail.x * 30, worm_tail.y * 30, NULL, 180, NULL, flipType);
+        else    tail.render(worm_tail.x * 30, worm_tail.y * 30);
+    }
+
 }
 
 

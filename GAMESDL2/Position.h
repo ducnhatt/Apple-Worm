@@ -36,6 +36,17 @@ struct Position
     bool operator==(Position p) const {
         return x == p.x && y == p.y;
     }
+    int subtraction_X(Position a, Position b){
+        return a.x - b.x;
+    }
+    int subtraction_Y(Position a, Position b){
+        return a.y - b.y;
+    }
 };
-
+int subtraction_X(Position a, Position b){
+    return a.x - b.x;
+}
+int subtraction_Y(Position a, Position b){
+    return a.y - b.y;
+}
 #endif // POSITION_H

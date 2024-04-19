@@ -14,6 +14,8 @@ public:
     void renderBackground();
     int handleEvent(SDL_Event& e);
     int handEventagain(SDL_Event& e);
+    int handEventagain_lose(SDL_Event& e);
+    int handEventagain_win(SDL_Event& e);
 
 private:
     LTexture levelTexture;
@@ -51,12 +53,50 @@ int Level::handEventagain(SDL_Event& e){
     }
     return -1;
 }
+int Level::handEventagain_lose(SDL_Event& e){
+    if(e.type == SDL_MOUSEBUTTONDOWN){
+        int x, y;
+        SDL_GetMouseState(&x, &y);
+        if(x >= 467 && y >= 273 +135 && x <= 595 && y <= 308 + 135){
+            cout << "play again" << endl;
+            return 1;
+        }
+        else if(x >= 467 && y >= 315 + 135 && x <= 595 && y <= 350 + 135){
+            cout << "quit" << endl;
+            return 2;
+        }
+        else if(x >= 456 && y >= 330 + 150 && x <= 456 + 150 && y <= 330 + 150 + 50){
+            cout << "restart" << endl;
+            return 3;
+        }
+    }
+    return -1;
+}
+int Level::handEventagain_win(SDL_Event& e){
+    if(e.type == SDL_MOUSEBUTTONDOWN){
+        int x, y;
+        SDL_GetMouseState(&x, &y);
+        if(x >= 467 && y >= 273 +135 && x <= 595 && y <= 308 + 135){
+            cout << "play again" << endl;
+            return 1;
+        }
+        else if(x >= 467 && y >= 315 + 135 && x <= 595 && y <= 350 + 135){
+            cout << "quit" << endl;
+            return 2;
+        }
+        else if(x >= 456 && y >= 330 + 150 && x <= 456 + 150 && y <= 330 + 150 + 50){
+            cout << "next level" << endl;
+            return 4;
+        }
+    }
+    return -1;
+}
 
 int Level::handleEvent(SDL_Event& e){
     if(e.type == SDL_MOUSEBUTTONDOWN){
         int x, y;
         SDL_GetMouseState(&x, &y);
-        if (x >= 132 && y >= 162 && x <= 264 && y <= 296){
+        if (x >= 132 && y >= 162 && x <= 264 && y <= 296){ 
             cout << "level 1" << endl;
             return 1;
         }
@@ -100,7 +140,7 @@ int Level::handleEvent(SDL_Event& e){
     }
     return -1;
 }
-string run_Select_Level(Level level, bool& run_game)
+string run_Select_Level(Level level, bool& run_game, int& number_level)
 {
     string select_level ="";
     SDL_Event e_level;
@@ -127,6 +167,7 @@ string run_Select_Level(Level level, bool& run_game)
             }
 
             int level_select_number = level.handleEvent(e_level);
+            number_level = level_select_number;
             if(level_select_number == 1){
                 run_game = true;
                 quit_select_level = true;

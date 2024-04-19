@@ -32,20 +32,25 @@ int main(int argc, char* args[]) {
 
     bool run_game = run_Menu(menu);
     string LEVEL ="";
+    int number_level = 0; //level đang chơi
     if(run_game){
-        LEVEL = run_Select_Level( level , run_game);
+        LEVEL = run_Select_Level( level , run_game, number_level);
     }
     
     SDL_Event e;
     bool game_over = false;
     bool run_level = false;
+    bool restart = false;
+    bool nextlevel = false;
+    
 
     createRainDrops();
-    
+
     
     while (run_game) { 
         load_Arr(LEVEL);
         // Khởi tạo các đối tượng trò chơi
+        degrees = 0;
         worm main;
         int frame = 0;
         int FRAME = 0;
@@ -164,6 +169,8 @@ int main(int argc, char* args[]) {
                             run_level = false;
                         }
                         int selected = level.handEventagain(e_select);
+                        if(win_game)    selected = level.handEventagain_win(e_select);
+                        else            selected = level.handEventagain_lose(e_select);     
                         if(selected == 1){
                             quit_select_again = true;
                             run_level = true;
@@ -174,9 +181,23 @@ int main(int argc, char* args[]) {
                             quit_select_again = true;
                             run_game = false;
                         }
+                        else if(selected == 3){
+                            quit_select_again = true;
+                            restart = true;
+                            run_game = false;
+                        }
+                        else if(selected == 4){
+                            quit_select_again = true;
+                            nextlevel = true;
+                            run_game = false;
+                        }
                     }
+                    
                     gBackgroundTexture.render(0, 0);
                     lossTexture.render(335, 150 + 100);
+
+                    if(game_over)   restartTexture.render(456, 330 + 150);
+                    else            nextlevelTexture.render(456, 330 + 150);
 
                     if(win_game){
                         // Mix_HaltMusic();
@@ -205,7 +226,7 @@ int main(int argc, char* args[]) {
                 
             }
         }
-        if(run_level){       //đã xử lí được chết và hiện biểu thị muốn chơi lại không nhưng vẫn chưa hiện được menu
+        if(run_level && (!restart) && (!nextlevel)){       //đã xử lí được chết và hiện biểu thị muốn chơi lại không nhưng vẫn chưa hiện được menu
                     // LEVEL = run_Select_Level( level , run_game);
                     // if(win_game){
                     //     head.render(300, 390);
@@ -223,9 +244,9 @@ int main(int argc, char* args[]) {
                         printf("Failed to load level textures!\n");
                         return -1;
                     }
-                    LEVEL = run_Select_Level(level2, run_game);
+                    LEVEL = run_Select_Level(level2, run_game, number_level);
                     // gBackgroundTexture.render(0, 0);
-                    cout << win_game << endl;
+                    // cout << win_game << endl;
                     // if(win_game){
                     //     head.render(300, 390);
                     // }
@@ -237,7 +258,36 @@ int main(int argc, char* args[]) {
                     
                     run_level = false;
                     win_game = false;
-                }    
+        }    
+        if(restart){
+            if(channel_win != -1)   Mix_HaltChannel(channel_win);
+
+            if(channel_lose != -1)  Mix_HaltChannel(channel_lose);
+
+            Mix_HaltMusic();
+
+            run_level = false;
+            win_game = false;
+            game_over = false;
+            run_game = true;
+            restart = false;
+        }
+        if(nextlevel){
+            if(channel_win != -1)   Mix_HaltChannel(channel_win);
+
+            if(channel_lose != -1)  Mix_HaltChannel(channel_lose);
+
+            Mix_HaltMusic();
+
+            run_level = false;
+            win_game = false;
+            game_over = false;
+            run_game = true;
+            nextlevel = false;
+
+            LEVEL = "pad/pad" + to_string((number_level % 10) + 1) +".txt";
+            number_level++;
+        }
     }
 
     close();

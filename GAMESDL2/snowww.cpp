@@ -63,7 +63,7 @@ bool loadMedia() {
         return false;
     }
 
-    SDL_Surface* surrface = IMG_Load("picture/background3.png");
+    SDL_Surface* surrface = IMG_Load("picture/background55.png");
     if (surrface == nullptr) {
         std::cerr << "Unable to load back image! SDL_image Error: " << IMG_GetError() << std::endl;
         return false;

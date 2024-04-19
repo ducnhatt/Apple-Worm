@@ -90,6 +90,8 @@ SDL_Renderer* gRenderer = NULL;
 LTexture gBackgroundTexture;
 LTexture head;
 LTexture body;
+LTexture tail;
+LTexture branch;
 LTexture land;
 LTexture apple;
 LTexture fire;
@@ -104,6 +106,8 @@ LTexture snowTexture;
 LTexture winTexture;
 LTexture dieTexture;
 LTexture surrenderTexture;
+LTexture restartTexture;
+LTexture nextlevelTexture;
 
 const int FIRE_ANIMATION_FRAMES = 6;
 SDL_Rect gSpriteClips[ FIRE_ANIMATION_FRAMES ];
@@ -154,7 +158,7 @@ void LTexture::loadMap(){
 bool LTexture::loadFromFile( std::string path )
 {
 	//Get rid of preexisting texture
-	free();
+	free();	//để giải phóng bất kỳ texture nào đã được tạo trước đó, nhằm tránh rò rỉ bộ nhớ.
 
 	//The final texture
 	SDL_Texture* newTexture = NULL;
@@ -424,7 +428,22 @@ bool loadMedia()
 		printf( "Failed to load background texture image!\n" );
 		success = false;
 	}
-	if( !head.loadFromFile( "picture/head6.png" ) )
+	if( !head.loadFromFile( "picture/redhead.png" ) )
+	{
+		printf( "Failed to load background texture image!\n" );
+		success = false;
+	}
+	if( !tail.loadFromFile( "picture/redtail.png" ) )
+	{
+		printf( "Failed to load background texture image!\n" );
+		success = false;
+	}
+	if( !branch.loadFromFile( "picture/11.png" ) )
+	{
+		printf( "Failed to load branch texture image!\n" );
+		success = false;
+	}
+	if( !body.loadFromFile( "picture/redbody.png" ) )
 	{
 		printf( "Failed to load background texture image!\n" );
 		success = false;
@@ -444,9 +463,14 @@ bool loadMedia()
 		printf( "Failed to load loss texture image!\n" );
 		success = false;
 	}
-	if( !body.loadFromFile( "picture/body5.png" ) )
+	if( !restartTexture.loadFromFile( "picture/restart.png" ) )
 	{
-		printf( "Failed to load background texture image!\n" );
+		printf( "Failed to load restart texture image!\n" );
+		success = false;
+	}
+	if( !nextlevelTexture.loadFromFile( "picture/next.png" ) )
+	{
+		printf( "Failed to load next level texture image!\n" );
 		success = false;
 	}
 	if( !land.loadFromFile( "picture/land1.png" ) )
@@ -464,7 +488,7 @@ bool loadMedia()
 		printf( "Failed to load snow texture image!\n" );
 		success = false;
 	}
-	if( !block_da.loadFromFile( "picture/da.png" ) )
+	if( !block_da.loadFromFile( "picture/da1.png" ) )
 	{
 		printf( "Failed to load background da texture image!\n" );
 		success = false;
@@ -519,32 +543,14 @@ bool loadMedia()
 	}
 	else
 	{
-		//Set sprite clips
-		// gSpriteHoden[ 0 ].x =   0;
-		// gSpriteHoden[ 0 ].y =   0;
-		// gSpriteHoden[ 0 ].w =  30;
-		// gSpriteHoden[ 0 ].h = 30;
-
-		// gSpriteHoden[ 1 ].x =  30;
-		// gSpriteHoden[ 1 ].y =   0;
-		// gSpriteHoden[ 1 ].w =  30;
-		// gSpriteHoden[ 1 ].h = 30;
-		
-		// gSpriteHoden[ 2 ].x = 0;
-		// gSpriteHoden[ 2 ].y = 30;
-		// gSpriteHoden[ 2 ].w =  30;
-		// gSpriteHoden[ 2 ].h = 30;
-
-		// gSpriteHoden[ 3 ].x = 30;
-		// gSpriteHoden[ 3 ].y =  30;
-		// gSpriteHoden[ 3 ].w =  30;
-		// gSpriteHoden[ 3 ].h = 30;
 		
 		for(int i = 0;i < HODEN_ANIMATION_FRAME; i++){
 			gSpriteHoden[i].x =(i % 5) * 40;
+
 			if(i >= 0 && i <= 4)			gSpriteHoden[i].y =0;
 			else if(i >= 5 && i <= 9)		gSpriteHoden[i].y =40;
 			else if(i >= 10 && i <= 14)		gSpriteHoden[i].y =80;
+
 			gSpriteHoden[i].w = 40;
 			gSpriteHoden[i].h = 40;
 		}
@@ -558,65 +564,14 @@ bool loadMedia()
 	}
 	else
 	{
-		gSpriteArrow[ 0 ].x =   0;
-		gSpriteArrow[ 0 ].y =   0;
-		gSpriteArrow[ 0 ].w =  30;
-		gSpriteArrow[ 0 ].h = 30;
+		for(int i = 0; i < ARROW_ANIMATION_FRAME; i++){
+			gSpriteArrow[i].w = 30;
+			gSpriteArrow[i].h  = 30;
+			gSpriteArrow[i].x = (i % 6) * 30;
 
-		gSpriteArrow[ 1 ].x =  30;
-		gSpriteArrow[ 1 ].y =   0;
-		gSpriteArrow[ 1 ].w =  30;
-		gSpriteArrow[ 1 ].h = 30;
-		
-		gSpriteArrow[ 2 ].x = 60;
-		gSpriteArrow[ 2 ].y = 0;
-		gSpriteArrow[ 2 ].w =  30;
-		gSpriteArrow[ 2 ].h = 30;
-
-		gSpriteArrow[ 3 ].x = 90;
-		gSpriteArrow[ 3 ].y =  0;
-		gSpriteArrow[ 3 ].w =  30;
-		gSpriteArrow[ 3 ].h = 30;
-
-		gSpriteArrow[ 4 ].x = 120;
-		gSpriteArrow[ 4 ].y =  0;
-		gSpriteArrow[ 4 ].w =  30;
-		gSpriteArrow[ 4 ].h = 30;
-
-		gSpriteArrow[ 5 ].x = 150;
-		gSpriteArrow[ 5 ].y =  0;
-		gSpriteArrow[ 5 ].w =  30;
-		gSpriteArrow[ 5 ].h = 30;
-
-		gSpriteArrow[ 6 ].x =   0;
-		gSpriteArrow[ 6 ].y =   30;
-		gSpriteArrow[ 6 ].w =  30;
-		gSpriteArrow[ 6 ].h = 30;
-
-		gSpriteArrow[ 7 ].x =  30;
-		gSpriteArrow[ 7 ].y =   30;
-		gSpriteArrow[ 7 ].w =  30;
-		gSpriteArrow[ 7 ].h = 30;
-		
-		gSpriteArrow[ 8 ].x = 60;
-		gSpriteArrow[ 8 ].y = 30;
-		gSpriteArrow[ 8 ].w =  30;
-		gSpriteArrow[ 8 ].h = 30;
-
-		gSpriteArrow[ 9 ].x = 90;
-		gSpriteArrow[ 9 ].y =  30;
-		gSpriteArrow[ 9 ].w =  30;
-		gSpriteArrow[ 9 ].h = 30;
-
-		gSpriteArrow[ 10 ].x = 120;
-		gSpriteArrow[ 10 ].y =  30;
-		gSpriteArrow[ 10 ].w =  30;
-		gSpriteArrow[ 10 ].h = 30;
-
-		gSpriteArrow[ 11 ].x = 150;
-		gSpriteArrow[ 11 ].y =  30;
-		gSpriteArrow[ 11 ].w =  30;
-		gSpriteArrow[ 11 ].h = 30;
+			if(i <= 5)	gSpriteArrow[i].y = 0;
+			else 		gSpriteArrow[i].y = 30;
+		}
 	}
 	return success;
 }
@@ -648,8 +603,12 @@ void close()
 	//Free loaded images
 	gBackgroundTexture.free();
 	head.free();
+	tail.free();
+	branch.free();
 	lossTexture.free();
 	winTexture.free();
+	restartTexture.free();
+	nextlevelTexture.free();
 	dieTexture.free();
 	body.free();
 	land.free();
