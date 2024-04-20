@@ -3,6 +3,7 @@
 # Giới thiệu game: 
 - Con sâu tham lam đã bị lạc vào các ải do thèm táo. Bạn cần tìm cách giúp nó đi đến hố không gian để quay về.
 - Bạn cần giúp ăn sâu ăn táo, đẩy đá, tránh lửa, tránh rơi xuống vực,... để có thể về đích
+- Di chuyển bằng các nút lên, xuống, trái, phải
 # Ngưỡng điểm mong muốn:
 - Qua quá trình code thì em nghĩ game của xứng đáng ở ngưỡng điểm 8 - 9
 - Lí do :
