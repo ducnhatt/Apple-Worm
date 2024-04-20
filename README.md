@@ -11,6 +11,6 @@
 - Lí do :
   - Ý tưởng game độc đáo, đòi hỏi tư duy từ người chơi
   - Game tự viết, tự thiết kế âm thanh hình ảnh
-  - Có các ý tưởng độc đáo ví dụ như tuyết rơi, pháo hoa chiến thắng 
+  - Có các ý tưởng độc đáo ví dụ như tuyết rơi, pháo hoa chiến thắng, thay đổi ngoại hình,....
   - Âm thanh, hình ảnh game sống động mượt mà
   - Xử lí chuyển động bằng toán học 
