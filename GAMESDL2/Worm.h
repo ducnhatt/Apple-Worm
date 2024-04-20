@@ -346,7 +346,15 @@ void worm::render(int skin_choosed){
 
     if(skin_choosed == 1){
         for(auto it =Worm.begin(); it != Worm.end(); it++){
-			if(it == Worm.begin()) redhead.render((*it).x * 30, (*it).y * 30, NULL, degrees, NULL, flipType);
+			if(it == Worm.begin()){
+                if(arr[it->y + 1][it->x] != 2 && arr[it->y -1][it->x] != 2 && arr[it->y][it->x + 1] != 2 && arr[it->y][it->x - 1] != 2){
+                    redhead.render((*it).x * 30, (*it).y * 30, NULL, degrees, NULL, flipType);
+                }
+                else{
+                    redeat.render((*it).x * 30, (*it).y * 30, NULL, degrees, NULL, flipType);
+                }
+            }
+            // redhead.render((*it).x * 30, (*it).y * 30, NULL, degrees, NULL, flipType);
 			// else if(it + 1 != Worm.end()) body.render((*it).x * 30, (*it).y * 30);
             else if(it + 1 != Worm.end()){
                 Position before_body_cur = *(it - 1);   //Phần tử trước body hiện tại
@@ -396,7 +404,15 @@ void worm::render(int skin_choosed){
 
     else if(skin_choosed == 2){
     for(auto it =Worm.begin(); it != Worm.end(); it++){
-			if(it == Worm.begin()) shithead.render((*it).x * 30, (*it).y * 30, NULL, degrees, NULL, flipType);
+			// if(it == Worm.begin()) shithead.render((*it).x * 30, (*it).y * 30, NULL, degrees, NULL, flipType);
+            if(it == Worm.begin()){
+                if(arr[it->y + 1][it->x] != 2 && arr[it->y -1][it->x] != 2 && arr[it->y][it->x + 1] != 2 && arr[it->y][it->x - 1] != 2){
+                    shithead.render((*it).x * 30, (*it).y * 30, NULL, degrees, NULL, flipType);
+                }
+                else{
+                    shiteat.render((*it).x * 30, (*it).y * 30, NULL, degrees, NULL, flipType);
+                }
+            }
 			// else if(it + 1 != Worm.end()) body.render((*it).x * 30, (*it).y * 30);
             else if(it + 1 != Worm.end()){
                 Position before_body_cur = *(it - 1);   //Phần tử trước body hiện tại
@@ -444,7 +460,15 @@ void worm::render(int skin_choosed){
     }
     else if(skin_choosed == 3){
     for(auto it =Worm.begin(); it != Worm.end(); it++){
-			if(it == Worm.begin()) memehead.render((*it).x * 30, (*it).y * 30, NULL, degrees, NULL, flipType);
+        if(it == Worm.begin()){
+                if(arr[it->y + 1][it->x] != 2 && arr[it->y -1][it->x] != 2 && arr[it->y][it->x + 1] != 2 && arr[it->y][it->x - 1] != 2){
+                    memehead.render((*it).x * 30, (*it).y * 30, NULL, degrees, NULL, flipType);
+                }
+                else{
+                    memeeat.render((*it).x * 30, (*it).y * 30, NULL, degrees, NULL, flipType);
+                }
+            }
+			// if(it == Worm.begin()) memehead.render((*it).x * 30, (*it).y * 30, NULL, degrees, NULL, flipType);
 			// else if(it + 1 != Worm.end()) body.render((*it).x * 30, (*it).y * 30);
             else if(it + 1 != Worm.end()){
                 Position before_body_cur = *(it - 1);   //Phần tử trước body hiện tại
@@ -492,7 +516,15 @@ void worm::render(int skin_choosed){
     }
     else if(skin_choosed == 4){
     for(auto it =Worm.begin(); it != Worm.end(); it++){
-			if(it == Worm.begin()) vegeshead.render((*it).x * 30, (*it).y * 30, NULL, degrees, NULL, flipType);
+        if(it == Worm.begin()){
+                if(arr[it->y + 1][it->x] != 2 && arr[it->y -1][it->x] != 2 && arr[it->y][it->x + 1] != 2 && arr[it->y][it->x - 1] != 2){
+                    vegeshead.render((*it).x * 30, (*it).y * 30, NULL, degrees, NULL, flipType);
+                }
+                else{
+                    vegeseat.render((*it).x * 30, (*it).y * 30, NULL, degrees, NULL, flipType);
+                }
+            }
+			// if(it == Worm.begin()) vegeshead.render((*it).x * 30, (*it).y * 30, NULL, degrees, NULL, flipType);
 			// else if(it + 1 != Worm.end()) body.render((*it).x * 30, (*it).y * 30);
             else if(it + 1 != Worm.end()){
                 Position before_body_cur = *(it - 1);   //Phần tử trước body hiện tại

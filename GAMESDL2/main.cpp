@@ -256,7 +256,7 @@ int main(int argc, char* args[]) {
                     // }
                     if(channel_win != -1){
                         Mix_HaltChannel(channel_win);
-                        
+                         
                     }
                     if(channel_lose != -1){
                         Mix_HaltChannel(channel_lose);

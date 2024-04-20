@@ -99,24 +99,28 @@ LTexture shithead;
 LTexture shitbody;
 LTexture shittail;
 LTexture shitbranch;
+LTexture shiteat;
 
 LTexture pickred;
 LTexture redhead;
 LTexture redbody;
 LTexture redtail;
 LTexture redbranch;
+LTexture redeat;
 
 LTexture pickmeme;
 LTexture memehead;
 LTexture memebody;
 LTexture memetail;
 LTexture memebranch;
+LTexture memeeat;
 
 LTexture pickveges;
 LTexture vegeshead;
 LTexture vegesbody;
 LTexture vegestail;
 LTexture vegesbranch;
+LTexture vegeseat;
 
 LTexture land;
 LTexture apple;
@@ -535,6 +539,11 @@ bool loadMedia()
 		printf( "Failed to load background texture image!\n" );
 		success = false;
 	}
+	if( !memeeat.loadFromFile( "picture/skin/memeeat.png" ) )
+	{
+		printf( "Failed to load background texture image!\n" );
+		success = false;
+	}
 
 
 	//load veges
@@ -559,6 +568,11 @@ bool loadMedia()
 		success = false;
 	}
 	if( !vegesbody.loadFromFile( "picture/skin/vegesbody.png" ) )
+	{
+		printf( "Failed to load background texture image!\n" );
+		success = false;
+	}
+	if( !vegeseat.loadFromFile( "picture/skin/vegeseat.png" ) )
 	{
 		printf( "Failed to load background texture image!\n" );
 		success = false;
@@ -591,6 +605,11 @@ bool loadMedia()
 		printf( "Failed to load background texture image!\n" );
 		success = false;
 	}
+	if( !shiteat.loadFromFile( "picture/skin/shiteat.png" ) )
+	{
+		printf( "Failed to load background texture image!\n" );
+		success = false;
+	}
 
 	//load red
 	if( !pickred.loadFromFile( "picture/skin/pickred.png" ) )
@@ -614,6 +633,11 @@ bool loadMedia()
 		success = false;
 	}
 	if( !redbody.loadFromFile( "picture/skin/redbody.png" ) )
+	{
+		printf( "Failed to load background texture image!\n" );
+		success = false;
+	}
+	if( !redeat.loadFromFile( "picture/skin/redeat.png" ) )
 	{
 		printf( "Failed to load background texture image!\n" );
 		success = false;
@@ -784,10 +808,10 @@ void close()
 	cloud3.free();
 	cloud4.free();
 	
-	shithead.free();		shittail.free();		shitbody.free();		shitbranch.free();	pickshit.free();	
-	redhead.free();			redtail.free();			redbody.free();			redbranch.free();	pickred.free();
-	vegeshead.free();		vegestail.free();		vegesbody.free();		vegesbranch.free();	pickveges.free();
-	memehead.free();		memetail.free();		memebody.free();		memebranch.free();	pickmeme.free();
+	shithead.free();		shittail.free();		shitbody.free();		shitbranch.free();	shiteat.free();		pickshit.free();	
+	redhead.free();			redtail.free();			redbody.free();			redbranch.free();	redeat.free();		pickred.free();
+	vegeshead.free();		vegestail.free();		vegesbody.free();		vegesbranch.free();	vegeseat.free();	pickveges.free();
+	memehead.free();		memetail.free();		memebody.free();		memebranch.free();	memeeat.free();		pickmeme.free();
 	skin.free(); 			shop.free();
 
 	lossTexture.free();
