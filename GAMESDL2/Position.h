@@ -29,19 +29,19 @@ struct Position
         return Position(x, y);
     }
 
-    bool isInsideBox(int left, int top, int width, int height) const {
-        return x >= left && x < left+width && y >= top && y < top+height;
-    }
+    // bool isInsideBox(int left, int top, int width, int height) const {
+    //     return x >= left && x < left+width && y >= top && y < top+height;
+    // }
 
     bool operator==(Position p) const {
         return x == p.x && y == p.y;
     }
-    int subtraction_X(Position a, Position b){
-        return a.x - b.x;
-    }
-    int subtraction_Y(Position a, Position b){
-        return a.y - b.y;
-    }
+    // int subtraction_X(Position a, Position b){
+    //     return a.x - b.x;
+    // }
+    // int subtraction_Y(Position a, Position b){
+    //     return a.y - b.y;
+    // }
 };
 int subtraction_X(Position a, Position b){
     return a.x - b.x;

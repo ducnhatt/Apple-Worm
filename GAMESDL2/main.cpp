@@ -202,7 +202,11 @@ int main(int argc, char* args[]) {
                     if(win_game){
                         // Mix_HaltMusic();
                         winTexture.render(290, 0);
+                        if (fireworks.size() < NUM_FIREWORKS) {
+                            spawnFirework(fireworks);
+                        }
                         updateFireworks(fireworks, deltaTime);
+                        cout << deltaTime << endl;
                         drawFireworks(fireworks);
                         // int volume = MIX_MAX_VOLUME - 30 ; // Giảm âm lượng xuống một nửa
                         
@@ -210,9 +214,7 @@ int main(int argc, char* args[]) {
                         // Mix_PlayChannel( -1, gWin, 0 );
 
                         // Spawn new fireworks
-                        if (fireworks.size() < NUM_FIREWORKS) {
-                            spawnFirework(fireworks);
-                        }
+                        
                     }
                     else{
                         dieTexture.render(330, 0);

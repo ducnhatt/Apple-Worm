@@ -40,7 +40,7 @@ bool Menu::loadMenuTextures() {
         printf("Failed to load exit texture image!\n");
         success = false;
     }
-    if (!backgroundTexture.loadFromFile("picture/menu.png")) { // Thay đổi đường dẫn và tên file hình nền của bạn
+    if (!backgroundTexture.loadFromFile("picture/menu.png")) { 
         printf("Failed to load background texture image!\n");
         success = false;
     }

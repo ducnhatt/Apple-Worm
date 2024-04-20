@@ -30,7 +30,7 @@ struct worm{
         // Worm.push_back(Position(6, 8));
     }
 
-    bool collison(int y ,int x){
+    bool collison(int y ,int x){    // check rơi đá
     if(arr[y + 1][x] == 1 || arr[y + 1][x] == 5 || arr[y + 1][x] == 2){
         return true;
     }
@@ -41,7 +41,7 @@ struct worm{
     return false;
     }
 
-    void grav_block_da(){
+    void grav_block_da(){ // ảnh hưởng của đá với các vật khác
     for(int i = 0; i < MAX_MAP_Y; i++)
     {
 	for(int j = 0; j < MAX_MAP_X; j++)
@@ -49,23 +49,23 @@ struct worm{
 		if(arr[i][j] == 5)
         {
             bool on = collison(i, j);
-            int jj = j, ii = i;
+            int jj = j, next_i = i;
             while(!on){
-                if(arr[ii + 1][jj] == 3){
-                    arr[ii + 1][jj] = 5;
-                    arr[ii][jj] = 0;
+                if(arr[next_i + 1][jj] == 3){
+                    arr[next_i + 1][jj] = 5;
+                    arr[next_i][jj] = 0;
                 }
-                else{swap(arr[ii + 1][jj], arr[ii][jj]);}
+                else{swap(arr[next_i + 1][jj], arr[next_i][jj]);}
                 // cout << ii << endl;
-                ii++;
-                on = collison(ii, jj);
+                next_i++;
+                on = collison(next_i, jj);
             }
         }
 	}
 	}
     }
 
-    bool onGround() {
+    bool onGround() {   //check trọng lực rắn
         for (auto it = Worm.begin(); it != Worm.end(); ++it) {
             if (arr[it->y +1 ][it->x] == 1 || arr[it->y + 1][it->x] == 2 || arr[it->y + 1][it->x] == 5 || arr[it->y + 1][it->x] == 4) {
                 return true;
@@ -221,10 +221,6 @@ struct worm{
         }    
 
          // Kiểm tra xem vị trí mới của con rắn có chứa quả táo không
-        // if (arr[newHead.y][newHead.x] == 2) {
-        //     arr[newHead.y][newHead.x] = 0;
-        //     Worm.push_back(Worm.back());
-        // }
         eatApple(newHead.x, newHead.y);
         if (newHead.x < 0 || newHead.x * 30 >= SCREEN_WIDTH || newHead.y < 0 || newHead.y * 30 >=SCREEN_HEIGHT) {
         // Nếu vị trí mới trùng với biên của màn hình, không di chuyển

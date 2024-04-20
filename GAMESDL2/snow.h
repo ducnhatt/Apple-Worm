@@ -46,14 +46,15 @@ void createRainDrops() {
 //         }
 //     }
 // }
-
+ 
 
 void updateRainDrops() {
-    static float angle = 0.0f;
+    static float angle = 0.0;
     for (auto& rainDrop : rainDrops) {
         // Tính toán vị trí mới của hạt mưa theo quỹ đạo cong
         // Sử dụng hàm sin để tạo ra biến thiên trong quỹ đạo
         rainDrop.x += rainDrop.speed * std::sin(angle); // Điều chỉnh góc cong bằng sin
+        // cout << angle << "   " << sin(angle) << "   " << rainDrop.x << endl;
         rainDrop.y += rainDrop.speed; // Di chuyển theo chiều dọc
 
         // Điều kiện kiểm tra xem hạt mưa có vượt ra khỏi màn hình không
@@ -63,7 +64,7 @@ void updateRainDrops() {
             rainDrop.y = -(std::rand() % SCREEN_HEIGHT);
         }
     }
-    angle += 0.01f; // Điều chỉnh tốc độ của quỹ đạo cong
+    angle += 0.01; // Điều chỉnh tốc độ của quỹ đạo cong
     
 }
 

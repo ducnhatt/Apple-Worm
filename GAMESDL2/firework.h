@@ -8,7 +8,7 @@
 #include "Texture.h"
  
 const int NUM_FIREWORKS = 1000;
-const int FIREWORK_PARTICLES = 100;
+// const int FIREWORK_PARTICLES = 100;
 
 struct Particle {
     float x, y;
@@ -22,12 +22,12 @@ void spawnFirework(std::vector<Particle>& fireworks) {
     Particle firework;
     firework.x = rand() % SCREEN_WIDTH;
     firework.y = 0; // Start from the top
-    firework.vx = (rand() % 600 - 300) / 100.0f;
-    firework.vy = (rand() % 5000 + 5000) / 100.0f; // Increase vy for faster movement
+    firework.vx = (rand() % 600 - 300) / 100.0;
+    firework.vy = (rand() % 5000 + 5000) / 100.0; // Increase vy for faster movement
     firework.r = rand() % 256;
     firework.g = rand() % 256;
     firework.b = rand() % 256;
-    firework.size = 6.0f + static_cast<float>(rand()) / (static_cast<float>(RAND_MAX / (10.0f - 6.0f)));  // Random size between 3 and 6
+    firework.size = 6.0 + (rand()) / ((RAND_MAX / (10.0 - 6.0)));  // Random size between 3 and 6
     fireworks.push_back(firework);
 }
 
@@ -36,7 +36,7 @@ void updateFireworks(std::vector<Particle>& fireworks, float deltaTime) {
     for (auto& firework : fireworks) {
         firework.x += firework.vx * deltaTime;
         firework.y += firework.vy * deltaTime;
-        firework.vy += 1.0f * deltaTime; // Increase vy over time for acceleration
+        // firework.vy +=  deltaTime; // Increase vy over time for acceleration
     }
 }
 

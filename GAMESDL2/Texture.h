@@ -81,7 +81,9 @@ bool init();
 bool loadMedia();
 
 //Frees media and shuts down SDL
-void close();SDL_Window* gWindow = NULL;
+void close();
+
+SDL_Window* gWindow = NULL;
 
 //The window renderer
 SDL_Renderer* gRenderer = NULL;
