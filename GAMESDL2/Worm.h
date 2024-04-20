@@ -340,11 +340,13 @@ struct worm{
             ON = onGround();
         }
     }
-    void render();
+    void render(int skin_choosed);
 };
-void worm::render(){
-    for(auto it =Worm.begin(); it != Worm.end(); it++){
-			if(it == Worm.begin()) head.render((*it).x * 30, (*it).y * 30, NULL, degrees, NULL, flipType);
+void worm::render(int skin_choosed){
+
+    if(skin_choosed == 1){
+        for(auto it =Worm.begin(); it != Worm.end(); it++){
+			if(it == Worm.begin()) redhead.render((*it).x * 30, (*it).y * 30, NULL, degrees, NULL, flipType);
 			// else if(it + 1 != Worm.end()) body.render((*it).x * 30, (*it).y * 30);
             else if(it + 1 != Worm.end()){
                 Position before_body_cur = *(it - 1);   //Phần tử trước body hiện tại
@@ -358,16 +360,16 @@ void worm::render(){
 
                 //xử lí các góc vuông
                 if((before_x == 1 && before_y == 0 && after_x == 0 && after_y == 1) || (before_x == 0 && before_y == 1 && after_x == 1 && after_y == 0))
-                    branch.render((*it).x * 30, (*it).y * 30, NULL, 270, NULL, flipType);
+                    redbranch.render((*it).x * 30, (*it).y * 30, NULL, 270, NULL, flipType);
                 else if((before_x == 0 && before_y == -1 && after_x == 1 && after_y == 0) || (before_x == 1 && before_y == 0 && after_x == 0 && after_y == -1))
-                    branch.render((*it).x * 30, (*it).y * 30, NULL, 180, NULL, flipType);
+                    redbranch.render((*it).x * 30, (*it).y * 30, NULL, 180, NULL, flipType);
                 else if((before_x == -1 && before_y == 0 && after_x == 0 && after_y == -1) || (before_x == 0 && before_y == -1 && after_x == -1 && after_y == 0))
-                    branch.render((*it).x * 30, (*it).y * 30, NULL, 90, NULL, flipType);
+                    redbranch.render((*it).x * 30, (*it).y * 30, NULL, 90, NULL, flipType);
                 else if((before_x == -1 && before_y == 0 && after_x == 0 && after_y == 1) || (before_x == 0 && before_y == 1 && after_x == -1 && after_y == 0))
-                    branch.render((*it).x * 30, (*it).y * 30);
+                    redbranch.render((*it).x * 30, (*it).y * 30);
                 else{       
-                    if(before_x == 0 && after_x == 0 && (before_y + after_y == 0)) body.render((*it).x * 30, (*it).y * 30, NULL, 90, NULL, flipType);
-                    else    body.render((*it).x * 30, (*it).y * 30);
+                    if(before_x == 0 && after_x == 0 && (before_y + after_y == 0)) redbody.render((*it).x * 30, (*it).y * 30, NULL, 90, NULL, flipType);
+                    else    redbody.render((*it).x * 30, (*it).y * 30);
                 }
             }
             // cout << (*it).x << " " << (*it).y << endl;
@@ -382,14 +384,160 @@ void worm::render(){
     int yy = subtraction_Y(*before_tail, worm_tail);
     
     if(xx == 0){
-        if(yy == 1) tail.render(worm_tail.x * 30, worm_tail.y * 30, NULL, 90, NULL, flipType);
-        else    tail.render(worm_tail.x * 30, worm_tail.y * 30, NULL, 270, NULL, flipType);
+        if(yy == 1) redtail.render(worm_tail.x * 30, worm_tail.y * 30, NULL, 90, NULL, flipType);
+        else    redtail.render(worm_tail.x * 30, worm_tail.y * 30, NULL, 270, NULL, flipType);
     }
     else{
-        if(xx == -1) tail.render(worm_tail.x * 30, worm_tail.y * 30, NULL, 180, NULL, flipType);
-        else    tail.render(worm_tail.x * 30, worm_tail.y * 30);
+        if(xx == -1) redtail.render(worm_tail.x * 30, worm_tail.y * 30, NULL, 180, NULL, flipType);
+        else    redtail.render(worm_tail.x * 30, worm_tail.y * 30);
+    }
     }
 
+
+    else if(skin_choosed == 2){
+    for(auto it =Worm.begin(); it != Worm.end(); it++){
+			if(it == Worm.begin()) shithead.render((*it).x * 30, (*it).y * 30, NULL, degrees, NULL, flipType);
+			// else if(it + 1 != Worm.end()) body.render((*it).x * 30, (*it).y * 30);
+            else if(it + 1 != Worm.end()){
+                Position before_body_cur = *(it - 1);   //Phần tử trước body hiện tại
+                Position after_body_cur = *(it + 1);    //phần tử sau body hiện tại
+
+                int before_x = subtraction_X(before_body_cur, *it);
+                int before_y = subtraction_Y(before_body_cur, *it);
+
+                int after_x = subtraction_X(after_body_cur, *it);
+                int after_y = subtraction_Y(after_body_cur, *it);
+
+                //xử lí các góc vuông
+                if((before_x == 1 && before_y == 0 && after_x == 0 && after_y == 1) || (before_x == 0 && before_y == 1 && after_x == 1 && after_y == 0))
+                    shitbranch.render((*it).x * 30, (*it).y * 30, NULL, 270, NULL, flipType);
+                else if((before_x == 0 && before_y == -1 && after_x == 1 && after_y == 0) || (before_x == 1 && before_y == 0 && after_x == 0 && after_y == -1))
+                    shitbranch.render((*it).x * 30, (*it).y * 30, NULL, 180, NULL, flipType);
+                else if((before_x == -1 && before_y == 0 && after_x == 0 && after_y == -1) || (before_x == 0 && before_y == -1 && after_x == -1 && after_y == 0))
+                    shitbranch.render((*it).x * 30, (*it).y * 30, NULL, 90, NULL, flipType);
+                else if((before_x == -1 && before_y == 0 && after_x == 0 && after_y == 1) || (before_x == 0 && before_y == 1 && after_x == -1 && after_y == 0))
+                    shitbranch.render((*it).x * 30, (*it).y * 30);
+                else{       
+                    if(before_x == 0 && after_x == 0 && (before_y + after_y == 0)) shitbody.render((*it).x * 30, (*it).y * 30, NULL, 90, NULL, flipType);
+                    else    shitbody.render((*it).x * 30, (*it).y * 30);
+                }
+            }
+            // cout << (*it).x << " " << (*it).y << endl;
+	}
+    auto before_tail = Worm.begin();
+    Position worm_tail = Worm.back();
+    while(before_tail != Worm.end()){
+        before_tail++;
+    }
+    before_tail = before_tail - 2;
+    int xx = subtraction_X(*before_tail, worm_tail);
+    int yy = subtraction_Y(*before_tail, worm_tail);
+    
+    if(xx == 0){
+        if(yy == 1) shittail.render(worm_tail.x * 30, worm_tail.y * 30, NULL, 90, NULL, flipType);
+        else    shittail.render(worm_tail.x * 30, worm_tail.y * 30, NULL, 270, NULL, flipType);
+    }
+    else{
+        if(xx == -1) shittail.render(worm_tail.x * 30, worm_tail.y * 30, NULL, 180, NULL, flipType);
+        else    shittail.render(worm_tail.x * 30, worm_tail.y * 30);
+    }
+    }
+    else if(skin_choosed == 3){
+    for(auto it =Worm.begin(); it != Worm.end(); it++){
+			if(it == Worm.begin()) memehead.render((*it).x * 30, (*it).y * 30, NULL, degrees, NULL, flipType);
+			// else if(it + 1 != Worm.end()) body.render((*it).x * 30, (*it).y * 30);
+            else if(it + 1 != Worm.end()){
+                Position before_body_cur = *(it - 1);   //Phần tử trước body hiện tại
+                Position after_body_cur = *(it + 1);    //phần tử sau body hiện tại
+
+                int before_x = subtraction_X(before_body_cur, *it);
+                int before_y = subtraction_Y(before_body_cur, *it);
+
+                int after_x = subtraction_X(after_body_cur, *it);
+                int after_y = subtraction_Y(after_body_cur, *it);
+
+                //xử lí các góc vuông
+                if((before_x == 1 && before_y == 0 && after_x == 0 && after_y == 1) || (before_x == 0 && before_y == 1 && after_x == 1 && after_y == 0))
+                    memebranch.render((*it).x * 30, (*it).y * 30, NULL, 270, NULL, flipType);
+                else if((before_x == 0 && before_y == -1 && after_x == 1 && after_y == 0) || (before_x == 1 && before_y == 0 && after_x == 0 && after_y == -1))
+                    memebranch.render((*it).x * 30, (*it).y * 30, NULL, 180, NULL, flipType);
+                else if((before_x == -1 && before_y == 0 && after_x == 0 && after_y == -1) || (before_x == 0 && before_y == -1 && after_x == -1 && after_y == 0))
+                    memebranch.render((*it).x * 30, (*it).y * 30, NULL, 90, NULL, flipType);
+                else if((before_x == -1 && before_y == 0 && after_x == 0 && after_y == 1) || (before_x == 0 && before_y == 1 && after_x == -1 && after_y == 0))
+                    memebranch.render((*it).x * 30, (*it).y * 30);
+                else{       
+                    if(before_x == 0 && after_x == 0 && (before_y + after_y == 0)) memebody.render((*it).x * 30, (*it).y * 30, NULL, 90, NULL, flipType);
+                    else    memebody.render((*it).x * 30, (*it).y * 30);
+                }
+            }
+            // cout << (*it).x << " " << (*it).y << endl;
+	}
+    auto before_tail = Worm.begin();
+    Position worm_tail = Worm.back();
+    while(before_tail != Worm.end()){
+        before_tail++;
+    }
+    before_tail = before_tail - 2;
+    int xx = subtraction_X(*before_tail, worm_tail);
+    int yy = subtraction_Y(*before_tail, worm_tail);
+    
+    if(xx == 0){
+        if(yy == 1) memetail.render(worm_tail.x * 30, worm_tail.y * 30, NULL, 90, NULL, flipType);
+        else    memetail.render(worm_tail.x * 30, worm_tail.y * 30, NULL, 270, NULL, flipType);
+    }
+    else{
+        if(xx == -1) memetail.render(worm_tail.x * 30, worm_tail.y * 30, NULL, 180, NULL, flipType);
+        else    memetail.render(worm_tail.x * 30, worm_tail.y * 30);
+    }
+    }
+    else if(skin_choosed == 4){
+    for(auto it =Worm.begin(); it != Worm.end(); it++){
+			if(it == Worm.begin()) vegeshead.render((*it).x * 30, (*it).y * 30, NULL, degrees, NULL, flipType);
+			// else if(it + 1 != Worm.end()) body.render((*it).x * 30, (*it).y * 30);
+            else if(it + 1 != Worm.end()){
+                Position before_body_cur = *(it - 1);   //Phần tử trước body hiện tại
+                Position after_body_cur = *(it + 1);    //phần tử sau body hiện tại
+
+                int before_x = subtraction_X(before_body_cur, *it);
+                int before_y = subtraction_Y(before_body_cur, *it);
+
+                int after_x = subtraction_X(after_body_cur, *it);
+                int after_y = subtraction_Y(after_body_cur, *it);
+
+                //xử lí các góc vuông
+                if((before_x == 1 && before_y == 0 && after_x == 0 && after_y == 1) || (before_x == 0 && before_y == 1 && after_x == 1 && after_y == 0))
+                    vegesbranch.render((*it).x * 30, (*it).y * 30, NULL, 270, NULL, flipType);
+                else if((before_x == 0 && before_y == -1 && after_x == 1 && after_y == 0) || (before_x == 1 && before_y == 0 && after_x == 0 && after_y == -1))
+                    vegesbranch.render((*it).x * 30, (*it).y * 30, NULL, 180, NULL, flipType);
+                else if((before_x == -1 && before_y == 0 && after_x == 0 && after_y == -1) || (before_x == 0 && before_y == -1 && after_x == -1 && after_y == 0))
+                    vegesbranch.render((*it).x * 30, (*it).y * 30, NULL, 90, NULL, flipType);
+                else if((before_x == -1 && before_y == 0 && after_x == 0 && after_y == 1) || (before_x == 0 && before_y == 1 && after_x == -1 && after_y == 0))
+                    vegesbranch.render((*it).x * 30, (*it).y * 30);
+                else{       
+                    if(before_x == 0 && after_x == 0 && (before_y + after_y == 0)) vegesbody.render((*it).x * 30, (*it).y * 30, NULL, 90, NULL, flipType);
+                    else    vegesbody.render((*it).x * 30, (*it).y * 30);
+                }
+            }
+            // cout << (*it).x << " " << (*it).y << endl;
+	}
+    auto before_tail = Worm.begin();
+    Position worm_tail = Worm.back();
+    while(before_tail != Worm.end()){
+        before_tail++;
+    }
+    before_tail = before_tail - 2;
+    int xx = subtraction_X(*before_tail, worm_tail);
+    int yy = subtraction_Y(*before_tail, worm_tail);
+    
+    if(xx == 0){
+        if(yy == 1) vegestail.render(worm_tail.x * 30, worm_tail.y * 30, NULL, 90, NULL, flipType);
+        else    vegestail.render(worm_tail.x * 30, worm_tail.y * 30, NULL, 270, NULL, flipType);
+    }
+    else{
+        if(xx == -1) vegestail.render(worm_tail.x * 30, worm_tail.y * 30, NULL, 180, NULL, flipType);
+        else    vegestail.render(worm_tail.x * 30, worm_tail.y * 30);
+    }
+    }
 }
 
 

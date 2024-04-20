@@ -4,6 +4,10 @@
 #include "level.h"
 #include "snow.h"
 #include "firework.h"
+#include "skin.h"
+
+
+SDL_Rect pickshop = {930, 150, 100, 65};
 
 int main(int argc, char* args[]) {
 
@@ -46,10 +50,11 @@ int main(int argc, char* args[]) {
 
     createRainDrops();
 
-    
+    int skin_choosed = 1;
     while (run_game) { 
         load_Arr(LEVEL);
         // Khởi tạo các đối tượng trò chơi
+        int cloudX = 0;
         degrees = 0;
         worm main;
         int frame = 0;
@@ -92,6 +97,9 @@ int main(int argc, char* args[]) {
                     if (xx >= 950 && xx <= 1030 && yy >= 50 && yy <= 130){
                         game_over = true;
                     }
+                    else if(xx >= pickshop.x && xx <= pickshop.x + pickshop.w && yy >= pickshop.y && yy <= pickshop.y + pickshop.h){
+                        choose_skin(skin_choosed);
+                    }
                 }
             }
 
@@ -100,11 +108,24 @@ int main(int argc, char* args[]) {
             // Xử lý trạng thái trò chơi và hiển thị lên màn hình
             SDL_SetRenderDrawColor(gRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
             SDL_RenderClear(gRenderer);
-            gBackgroundTexture.render(0, 0);
+
+            // gBackgroundTexture.render(0, 0);
+            sky.render(0, 0);
+			rock1.render(0, 0);
+			rock2.render(0, 0);
+			cloud1.render(0, 0);
+			cloud2.render(cloudX, 0);
+			cloud3.render(cloudX, 0);
+			cloud4.render(0, 0);
+			cloudX -= 1;
+			if (cloudX <= -SCREEN_WIDTH) {
+            	cloudX = SCREEN_WIDTH;
+        	}
             land.renderland();
             apple.renderapple();
             block_da.renderblockda();
             surrenderTexture.render(950, 50);
+            shop.render_draw(&pickshop);
 
             SDL_Rect* currentClip = &gSpriteClips[frame / 6];
             fire.renderfire(frame, currentClip);
@@ -115,7 +136,7 @@ int main(int argc, char* args[]) {
             SDL_Rect* currentArrow = &gSpriteArrow[frame_arrow / 12];
             arrow.renderarrow(frame_arrow, currentArrow);
 
-            main.render();
+            main.render(skin_choosed);
 
             snowTexture.renderRainDrops();
 

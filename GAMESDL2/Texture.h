@@ -90,10 +90,34 @@ SDL_Renderer* gRenderer = NULL;
 
 //Scene textures
 LTexture gBackgroundTexture;
-LTexture head;
-LTexture body;
-LTexture tail;
-LTexture branch;
+
+LTexture skin;
+LTexture shop;
+
+LTexture pickshit;
+LTexture shithead;
+LTexture shitbody;
+LTexture shittail;
+LTexture shitbranch;
+
+LTexture pickred;
+LTexture redhead;
+LTexture redbody;
+LTexture redtail;
+LTexture redbranch;
+
+LTexture pickmeme;
+LTexture memehead;
+LTexture memebody;
+LTexture memetail;
+LTexture memebranch;
+
+LTexture pickveges;
+LTexture vegeshead;
+LTexture vegesbody;
+LTexture vegestail;
+LTexture vegesbranch;
+
 LTexture land;
 LTexture apple;
 LTexture fire;
@@ -110,6 +134,13 @@ LTexture dieTexture;
 LTexture surrenderTexture;
 LTexture restartTexture;
 LTexture nextlevelTexture;
+LTexture sky;
+LTexture rock1;
+LTexture rock2;
+LTexture cloud1;
+LTexture cloud2;
+LTexture cloud3;
+LTexture cloud4;
 
 const int FIRE_ANIMATION_FRAMES = 6;
 SDL_Rect gSpriteClips[ FIRE_ANIMATION_FRAMES ];
@@ -430,26 +461,167 @@ bool loadMedia()
 		printf( "Failed to load background texture image!\n" );
 		success = false;
 	}
-	if( !head.loadFromFile( "picture/redhead.png" ) )
+	if( !sky.loadFromFile( "picture/sky.png" ) )
 	{
 		printf( "Failed to load background texture image!\n" );
 		success = false;
 	}
-	if( !tail.loadFromFile( "picture/redtail.png" ) )
+	if( !rock1.loadFromFile( "picture/rocks_1.png" ) )
 	{
 		printf( "Failed to load background texture image!\n" );
 		success = false;
 	}
-	if( !branch.loadFromFile( "picture/11.png" ) )
+	if( !rock2.loadFromFile( "picture/rocks_2.png" ) )
+	{
+		printf( "Failed to load background texture image!\n" );
+		success = false;
+	}
+	if( !cloud1.loadFromFile( "picture/clouds_1.png" ) )
+	{
+		printf( "Failed to load background texture image!\n" );
+		success = false;
+	}
+	if( !cloud2.loadFromFile( "picture/clouds_2.png" ) )
+	{
+		printf( "Failed to load background texture image!\n" );
+		success = false;
+	}
+	if( !cloud3.loadFromFile( "picture/clouds_3.png" ) )
+	{
+		printf( "Failed to load background texture image!\n" );
+		success = false;
+	}
+	if( !cloud4.loadFromFile( "picture/clouds_4.png" ) )
+	{
+		printf( "Failed to load background texture image!\n" );
+		success = false;
+	}
+
+	if( !skin.loadFromFile( "picture/skin.png" ) )
+	{
+		printf( "Failed to load background texture image!\n" );
+		success = false;
+	}
+	if( !shop.loadFromFile( "picture/shop.png" ) )
+	{
+		printf( "Failed to load background texture image!\n" );
+		success = false;
+	}
+	
+	
+	//load meme
+	if( !pickmeme.loadFromFile( "picture/skin/pickmeme.png" ) )
+	{
+		printf( "Failed to load background texture image!\n" );
+		success = false;
+	}
+	if( !memehead.loadFromFile( "picture/skin/memehead.png" ) )
+	{
+		printf( "Failed to load background texture image!\n" );
+		success = false;
+	}
+	if( !memetail.loadFromFile( "picture/skin/memetail.png" ) )
+	{
+		printf( "Failed to load background texture image!\n" );
+		success = false;
+	}
+	if( !memebranch.loadFromFile( "picture/skin/meme11.png" ) )
 	{
 		printf( "Failed to load branch texture image!\n" );
 		success = false;
 	}
-	if( !body.loadFromFile( "picture/redbody.png" ) )
+	if( !memebody.loadFromFile( "picture/skin/memebody.png" ) )
 	{
 		printf( "Failed to load background texture image!\n" );
 		success = false;
 	}
+
+
+	//load veges
+	if( !pickveges.loadFromFile( "picture/skin/pickveges.png" ) )
+	{
+		printf( "Failed to load background texture image!\n" );
+		success = false;
+	}
+	if( !vegeshead.loadFromFile( "picture/skin/vegeshead.png" ) )
+	{
+		printf( "Failed to load background texture image!\n" );
+		success = false;
+	}
+	if( !vegestail.loadFromFile( "picture/skin/vegestail.png" ) )
+	{
+		printf( "Failed to load background texture image!\n" );
+		success = false;
+	}
+	if( !vegesbranch.loadFromFile( "picture/skin/veges11.png" ) )
+	{
+		printf( "Failed to load branch texture image!\n" );
+		success = false;
+	}
+	if( !vegesbody.loadFromFile( "picture/skin/vegesbody.png" ) )
+	{
+		printf( "Failed to load background texture image!\n" );
+		success = false;
+	}
+
+
+	//load shit
+	if( !pickshit.loadFromFile( "picture/skin/pickshit.png" ) )
+	{
+		printf( "Failed to load background texture image!\n" );
+		success = false;
+	}
+	if( !shithead.loadFromFile( "picture/skin/shithead.png" ) )
+	{
+		printf( "Failed to load background texture image!\n" );
+		success = false;
+	}
+	if( !shittail.loadFromFile( "picture/skin/shittail.png" ) )
+	{
+		printf( "Failed to load background texture image!\n" );
+		success = false;
+	}
+	if( !shitbranch.loadFromFile( "picture/skin/shit11.png" ) )
+	{
+		printf( "Failed to load branch texture image!\n" );
+		success = false;
+	}
+	if( !shitbody.loadFromFile( "picture/skin/shitbody.png" ) )
+	{
+		printf( "Failed to load background texture image!\n" );
+		success = false;
+	}
+
+	//load red
+	if( !pickred.loadFromFile( "picture/skin/pickred.png" ) )
+	{
+		printf( "Failed to load background texture image!\n" );
+		success = false;
+	}
+	if( !redhead.loadFromFile( "picture/skin/redhead.png" ) )
+	{
+		printf( "Failed to load background texture image!\n" );
+		success = false;
+	}
+	if( !redtail.loadFromFile( "picture/skin/redtail.png" ) )
+	{
+		printf( "Failed to load background texture image!\n" );
+		success = false;
+	}
+	if( !redbranch.loadFromFile( "picture/skin/red11.png" ) )
+	{
+		printf( "Failed to load branch texture image!\n" );
+		success = false;
+	}
+	if( !redbody.loadFromFile( "picture/skin/redbody.png" ) )
+	{
+		printf( "Failed to load background texture image!\n" );
+		success = false;
+	}
+
+
+
+
 	if( !dieTexture.loadFromFile( "picture/die3.png" ) )
 	{
 		printf( "Failed to load background texture image!\n" );
@@ -604,15 +776,26 @@ void close()
 
 	//Free loaded images
 	gBackgroundTexture.free();
-	head.free();
-	tail.free();
-	branch.free();
+	sky.free();
+	rock1.free();
+	rock2.free();
+	cloud2.free();
+	cloud1.free();
+	cloud3.free();
+	cloud4.free();
+	
+	shithead.free();		shittail.free();		shitbody.free();		shitbranch.free();	pickshit.free();	
+	redhead.free();			redtail.free();			redbody.free();			redbranch.free();	pickred.free();
+	vegeshead.free();		vegestail.free();		vegesbody.free();		vegesbranch.free();	pickveges.free();
+	memehead.free();		memetail.free();		memebody.free();		memebranch.free();	pickmeme.free();
+	skin.free(); 			shop.free();
+
 	lossTexture.free();
 	winTexture.free();
 	restartTexture.free();
 	nextlevelTexture.free();
 	dieTexture.free();
-	body.free();
+	
 	land.free();
 	apple.free();
 	snowTexture.free();
