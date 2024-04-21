@@ -3,6 +3,7 @@
 
 
 #include "Texture.h"
+#include "highlight.h"
 
 
 SDL_Rect red_skin = {SCREEN_WIDTH/2 - 100, SCREEN_HEIGHT /2 - 60, 80, 80,};
@@ -15,6 +16,7 @@ SDL_Rect skinmenu = {SCREEN_WIDTH/ 2 -200, SCREEN_HEIGHT /2 - 300 /2, 400, 316};
 
 void choose_skin(int &skin_choosed){
     int run_menu_skin = true;SDL_Event e_menu_skin;
+    bool inside;
     while(run_menu_skin){
         while (SDL_PollEvent(&e_menu_skin) != 0){
             if(e_menu_skin.type == SDL_MOUSEBUTTONDOWN)
@@ -42,6 +44,10 @@ void choose_skin(int &skin_choosed){
                     run_menu_skin = false;
                 }
             }
+            highlight_the_selection(e_menu_skin, red_skin, pickred, inside);
+            highlight_the_selection(e_menu_skin, shit_skin, pickshit, inside);
+            highlight_the_selection(e_menu_skin, meme_skin, pickmeme, inside);
+            highlight_the_selection(e_menu_skin, veges_skin, pickveges, inside);
         }
         skin.render_draw(&skinmenu);
         pickred.render_draw(&red_skin);

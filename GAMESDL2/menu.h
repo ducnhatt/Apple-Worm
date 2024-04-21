@@ -2,10 +2,11 @@
 #define MENU_H
 #include <SDL2/SDL.h>
 #include "Texture.h"
+#include "highlight.h"
 
-bool isMouseInsideRect(int x, int y, SDL_Rect rect) {
-    return (x >= rect.x && x <= rect.x + rect.w && y >= rect.y && y <= rect.y + rect.h);
-}
+// bool isMouseInsideRect(int x, int y, SDL_Rect rect) {
+//     return (x >= rect.x && x <= rect.x + rect.w && y >= rect.y && y <= rect.y + rect.h);
+// }
 
 SDL_Rect playRect = {SCREEN_WIDTH / 2 - 66, SCREEN_HEIGHT / 2  + 20, 181, 160};
 SDL_Rect exitRect = {SCREEN_WIDTH / 2 - 30, SCREEN_HEIGHT / 2 + 180, 90, 90};

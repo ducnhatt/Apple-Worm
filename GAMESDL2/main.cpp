@@ -5,6 +5,9 @@
 #include "snow.h"
 #include "firework.h"
 #include "skin.h"
+#include "highlight.h"
+
+
 
 
 SDL_Rect pickshop = {930, 150, 100, 65};
@@ -105,28 +108,30 @@ int main(int argc, char* args[]) {
                         choose_skin(skin_choosed);
                     }
                 }
-                if(e.type == SDL_MOUSEMOTION){
-                    int mouseX = e.motion.x;
-                    int mouseY = e.motion.y;
-                    surrenderHighlighted = isMouseInsideRect(mouseX, mouseY, surrender);
-                    shopHighlighted = isMouseInsideRect(mouseX, mouseY, pickshop);
+                // if(e.type == SDL_MOUSEMOTION){
+                //     int mouseX = e.motion.x;
+                //     int mouseY = e.motion.y;
+                //     surrenderHighlighted = isMouseInsideRect(mouseX, mouseY, surrender);
+                //     shopHighlighted = isMouseInsideRect(mouseX, mouseY, pickshop);
 
-                    if (surrenderHighlighted) {
-                        // SDL_SetTextureColorMod(playTexture, 255, 255, 0); // Màu vàng
-                        surrenderTexture.setColorMod(20, 250, 0);
-                    } else {
-                        // SDL_SetTextureColorMod(startTexture, 255, 255, 255);
-                        surrenderTexture.setColorMod(255, 255, 255);
-                    }
+                //     if (surrenderHighlighted) {
+                //         // SDL_SetTextureColorMod(playTexture, 255, 255, 0); // Màu vàng
+                //         surrenderTexture.setColorMod(20, 250, 0);
+                //     } else {
+                //         // SDL_SetTextureColorMod(startTexture, 255, 255, 255);
+                //         surrenderTexture.setColorMod(255, 255, 255);
+                //     }
 
-                    if (shopHighlighted) {
-                        // SDL_SetTextureColorMod(playTexture, 255, 255, 0); // Màu vàng
-                        shop.setColorMod(20, 250, 0);
-                    } else {
-                        // SDL_SetTextureColorMod(startTexture, 255, 255, 255);
-                        shop.setColorMod(255, 255, 255);
-                    }
-                }
+                //     if (shopHighlighted) {
+                //         // SDL_SetTextureColorMod(playTexture, 255, 255, 0); // Màu vàng
+                //         shop.setColorMod(20, 250, 0);
+                //     } else {
+                //         // SDL_SetTextureColorMod(startTexture, 255, 255, 255);
+                //         shop.setColorMod(255, 255, 255);
+                //     }
+                // }
+                highlight_the_selection(e, surrender, surrenderTexture, surrenderHighlighted);
+                highlight_the_selection(e, pickshop, shop, shopHighlighted);
             }
 
 
