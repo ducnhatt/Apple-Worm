@@ -110,6 +110,7 @@ struct worm{
             }
         }
     }
+    grav_block_da();
         if(Worm.empty()){
             cout << "is empty";
         }
