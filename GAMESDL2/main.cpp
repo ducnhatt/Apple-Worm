@@ -8,6 +8,7 @@
 
 
 SDL_Rect pickshop = {930, 150, 100, 65};
+SDL_Rect surrender = {950, 50, 80, 80};
 
 int main(int argc, char* args[]) {
 
@@ -51,6 +52,8 @@ int main(int argc, char* args[]) {
     createRainDrops();
 
     int skin_choosed = 1;
+    bool surrenderHighlighted;
+    bool shopHighlighted;
     while (run_game) { 
         load_Arr(LEVEL);
         // Khởi tạo các đối tượng trò chơi
@@ -91,14 +94,37 @@ int main(int argc, char* args[]) {
                 if(e.type == SDL_MOUSEBUTTONDOWN){
                     int xx, yy;
                     SDL_GetMouseState(&xx, &yy);
-                    // x = e.motion.x;
-                    // y = e.motion.y;
+                    // xx = e.motion.x;
+                    // yy = e.motion.y;
                     
-                    if (xx >= 950 && xx <= 1030 && yy >= 50 && yy <= 130){
+
+                    if (xx >= surrender.x && xx <= surrender.x + surrender.w && yy >= surrender.y && yy <= surrender.y + surrender.h){
                         game_over = true;
                     }
                     else if(xx >= pickshop.x && xx <= pickshop.x + pickshop.w && yy >= pickshop.y && yy <= pickshop.y + pickshop.h){
                         choose_skin(skin_choosed);
+                    }
+                }
+                if(e.type == SDL_MOUSEMOTION){
+                    int mouseX = e.motion.x;
+                    int mouseY = e.motion.y;
+                    surrenderHighlighted = isMouseInsideRect(mouseX, mouseY, surrender);
+                    shopHighlighted = isMouseInsideRect(mouseX, mouseY, pickshop);
+
+                    if (surrenderHighlighted) {
+                        // SDL_SetTextureColorMod(playTexture, 255, 255, 0); // Màu vàng
+                        surrenderTexture.setColorMod(20, 250, 0);
+                    } else {
+                        // SDL_SetTextureColorMod(startTexture, 255, 255, 255);
+                        surrenderTexture.setColorMod(255, 255, 255);
+                    }
+
+                    if (shopHighlighted) {
+                        // SDL_SetTextureColorMod(playTexture, 255, 255, 0); // Màu vàng
+                        shop.setColorMod(20, 250, 0);
+                    } else {
+                        // SDL_SetTextureColorMod(startTexture, 255, 255, 255);
+                        shop.setColorMod(255, 255, 255);
                     }
                 }
             }
@@ -124,7 +150,8 @@ int main(int argc, char* args[]) {
             land.renderland();
             apple.renderapple();
             block_da.renderblockda();
-            surrenderTexture.render(950, 50);
+
+            surrenderTexture.render_draw(&surrender);
             shop.render_draw(&pickshop);
 
             SDL_Rect* currentClip = &gSpriteClips[frame / 6];
@@ -227,7 +254,7 @@ int main(int argc, char* args[]) {
                             spawnFirework(fireworks);
                         }
                         updateFireworks(fireworks, deltaTime);
-                        cout << deltaTime << endl;
+                        // cout << deltaTime << endl;
                         drawFireworks(fireworks);
                         // int volume = MIX_MAX_VOLUME - 30 ; // Giảm âm lượng xuống một nửa
                         
@@ -274,7 +301,7 @@ int main(int argc, char* args[]) {
                     //     head.render(300, 390);
                     // }
                     // SDL_RenderPresent(gRenderer);
-                    cout << "nguuuuuu";
+                    // cout << "nguuuuuu";
                     // run_game = true;
                     // run_level = true;
                     // run_game = true;
